@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/12/08 16:58:42.000.093,=D:\Prog\Unit1.pas</Transaction>
+    <Transaction>2021/12/08 17:13:47.000.109,=D:\Prog\Unit1.pas</Transaction>
+    <Transaction>2023/09/01 08:57:01.000.947,=D:\Prog\Unit1.pas</Transaction>
+    <Transaction>2023/09/01 09:04:37.000.383,=D:\Prog\Unit2.pas</Transaction>
+    <Transaction>2023/09/01 09:05:49.000.600,D:\Prog\Unit1.dfm=C:\Users\MEUCOMPUTADOR\Desktop\Project\units\FTest.dfm</Transaction>
+    <Transaction>2023/09/01 09:05:49.000.600,D:\Prog\Unit1.pas=C:\Users\MEUCOMPUTADOR\Desktop\Project\units\FTest.pas</Transaction>
+    <Transaction>2023/09/01 09:05:54.000.339,D:\Prog\Unit2.dfm=C:\Users\MEUCOMPUTADOR\Desktop\Project\units\DTest.dfm</Transaction>
+    <Transaction>2023/09/01 09:05:54.000.339,D:\Prog\Unit2.pas=C:\Users\MEUCOMPUTADOR\Desktop\Project\units\DTest.pas</Transaction>
+    <Transaction>2023/09/01 09:43:35.000.796,D:\Prog\Project1.dproj=C:\Users\MEUCOMPUTADOR\Desktop\Project\project\Project1.dproj</Transaction>
+    <Transaction>2023/09/01 14:45:39.802,=C:\Users\MEUCOMPUTADOR\Desktop\Project\project\Unit1.pas</Transaction>
+    <Transaction>2023/09/01 14:45:50.410,=C:\Users\MEUCOMPUTADOR\Desktop\Project\project\Unit1.pas</Transaction>
+    <Transaction>2023/09/01 14:46:57.659,C:\Users\MEUCOMPUTADOR\Desktop\Project\units\FConfigConnection.dfm=C:\Users\MEUCOMPUTADOR\Desktop\Project\project\Unit1.dfm</Transaction>
+    <Transaction>2023/09/01 14:46:57.659,C:\Users\MEUCOMPUTADOR\Desktop\Project\units\FConfigConnection.pas=C:\Users\MEUCOMPUTADOR\Desktop\Project\project\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

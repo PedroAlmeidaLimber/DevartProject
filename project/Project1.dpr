@@ -1,0 +1,17 @@
+program Project1;
+
+uses
+  Vcl.Forms,
+  FConfigConnection in '..\units\FConfigConnection.pas' {FFrmConnect},
+  FTest in '..\units\FTest.pas' {FFrmTest},
+  DTest in '..\units\DTest.pas' {DDmTest: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFFrmConnect, FFrmConnect);
+  Application.CreateForm(TFFrmTest, FFrmTest);
+  Application.Run;
+end.
