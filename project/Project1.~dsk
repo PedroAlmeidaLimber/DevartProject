@@ -4,22 +4,17 @@ File_1=TSourceModule,'D:\Prog\cde_win\Components\ECCLASS\forms\Form_Base_Rel1.pa
 File_2=TSourceModule,'D:\Prog\cde_win\Components\ECCLASS\forms\Form_Base0.pas',0,1,1,1,1,0,0,,
 
 [Modules]
-Module0=C:\Users\MEUCOMPUTADOR\Desktop\Project\units\FTest.pas
-Module1=C:\Users\MEUCOMPUTADOR\Desktop\Project\units\DTest.pas
-Count=2
+Module0=default.htm
+Count=1
 EditWindowCount=1
 
-[C:\Users\MEUCOMPUTADOR\Desktop\Project\units\FTest.pas]
-ModuleType=TSourceModule
-
-[C:\Users\MEUCOMPUTADOR\Desktop\Project\units\DTest.pas]
-ModuleType=TSourceModule
+[default.htm]
+ModuleType=TURLModule
 
 [EditWindow0]
-ViewCount=2
-CurrentEditView=C:\Users\MEUCOMPUTADOR\Desktop\Project\units\FTest.pas
+ViewCount=1
+CurrentView=0
 View0=0
-View1=1
 PercentageSizes=1
 Create=1
 Visible=1
@@ -50,26 +45,8 @@ TabDockLeftClients=DockSite3=0
 TabDockRightClients=DockSite2=0,DockSite4=1
 
 [View0]
-CustomEditViewType=TEditView
-Module=C:\Users\MEUCOMPUTADOR\Desktop\Project\units\FTest.pas
-CursorX=97
-CursorY=75
-TopLine=70
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=Borland.FormDesignerView
-
-[View1]
-CustomEditViewType=TEditView
-Module=C:\Users\MEUCOMPUTADOR\Desktop\Project\units\DTest.pas
-CursorX=215
-CursorY=145
-TopLine=140
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=Borland.FormDesignerView
+CustomEditViewType=TWelcomePageView
+WelcomePageURL=bds:/default.htm
 
 [UndockedDesigner]
 Count=0
@@ -253,11 +230,6 @@ LRDockWidth=1680
 Dockable=1
 StayOnTop=0
 SplitPos=104
-
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Caption,
-ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,GlassFrame=0,HorzScrollBar=0
 
 [ClassBrowserTool]
 PercentageSizes=1
@@ -612,14 +584,14 @@ Docked=0
 State=0
 Left=0
 Top=0
-Width=5039
+Width=3777
 Height=8308
 MaxLeft=-4
 MaxTop=-10
-ClientWidth=4977
+ClientWidth=3715
 ClientHeight=7933
 TBDockHeight=8308
-LRDockWidth=5039
+LRDockWidth=3777
 Dockable=1
 StayOnTop=0
 
@@ -631,14 +603,14 @@ Docked=0
 State=0
 Left=0
 Top=0
-Width=1719
+Width=1289
 Height=2471
 MaxLeft=-4
 MaxTop=-10
-ClientWidth=1656
+ClientWidth=1227
 ClientHeight=2096
 TBDockHeight=2471
-LRDockWidth=1719
+LRDockWidth=1289
 Dockable=1
 StayOnTop=0
 

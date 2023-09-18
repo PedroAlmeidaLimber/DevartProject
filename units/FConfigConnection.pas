@@ -21,10 +21,13 @@ type
     procedure btnSelecDirectoryClick(Sender: TObject);
     procedure btnConnectClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     function LoginValidate: Boolean;
 
+    procedure SaveLastConnection;
+    procedure ReadLastConnection;
     procedure SetConnection(var SqlConnection: TSQLConnection);
     procedure Connect;
   public
@@ -35,6 +38,9 @@ var
   FFrmConnect: TFFrmConnect;
 
 implementation
+
+uses
+  System.IniFiles;
 
 {$R *.dfm}
 
@@ -55,8 +61,7 @@ end;
 
 procedure TFFrmConnect.Connect;
 begin
-  SetConnection(FFrmTest.DmTest.sqlConectionDevartFirebird);
-  SetConnection(FFrmTest.DmTest.sqlConectionFirebird);
+  SetConnection(FFrmTest.DmTest.sqlConnectionDevart);
   FFrmTest.Show;
   Self.Close;
 end;
@@ -65,9 +70,15 @@ procedure TFFrmConnect.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   P: Pointer;
 begin
+  SaveLastConnection;
   P := @Application.MainForm;
   TForm(P^) := FFrmTest;
   Application.MainForm.Show;
+end;
+
+procedure TFFrmConnect.FormCreate(Sender: TObject);
+begin
+  ReadLastConnection;
 end;
 
 function TFFrmConnect.LoginValidate: Boolean;
@@ -85,6 +96,67 @@ begin
   end;
 
   Result := True;
+end;
+
+procedure TFFrmConnect.ReadLastConnection;
+var
+  vIniFile: TIniFile;
+begin
+  try
+    vIniFile := TIniFile.Create(ExtractFilePath(Application.ExeName) + 'connection.ini');
+
+    edtDirectory.Text :=
+      vIniFile.ReadString(
+        'CONN',
+        'database',
+        ''
+      );
+
+    edtUsername.Text :=
+      vIniFile.ReadString(
+        'CONN',
+        'user',
+        ''
+      );
+
+    edtPassword.Text :=
+      vIniFile.ReadString(
+        'CONN',
+        'password',
+        ''
+      );
+  finally
+    FreeAndNil(vIniFile);
+  end;
+end;
+
+procedure TFFrmConnect.SaveLastConnection;
+var
+  vIniFile: TIniFile;
+begin
+  try
+    vIniFile := TIniFile.Create(ExtractFilePath(Application.ExeName) + 'connection.ini');
+
+    vIniFile.WriteString(
+      'CONN',
+      'database',
+      edtDirectory.Text
+    );
+
+    vIniFile.WriteString(
+      'CONN',
+      'user',
+      edtUsername.Text
+    );
+
+    vIniFile.WriteString(
+      'CONN',
+      'password',
+      edtPassword.Text
+    );
+  finally
+    FreeAndNil(vIniFile);
+  end;
 end;
 
 procedure TFFrmConnect.SetConnection(var SqlConnection: TSQLConnection);

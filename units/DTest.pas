@@ -8,30 +8,7 @@ uses
 
 type
   TDDmTest = class(TDataModule)
-    sqlConectionDevartFirebird: TSQLConnection;
-    sqlExample2Devart: TSQLDataSet;
-    cdsExample2Devart: TClientDataSet;
-    dspExample2Devart: TDataSetProvider;
-    dsExample2Devart: TDataSource;
-    sqlExample2Firebird: TSQLDataSet;
-    dspExample2Firebird: TDataSetProvider;
-    cdsExample2Firebird: TClientDataSet;
-    dsExample2Firebird: TDataSource;
-    sqlConectionFirebird: TSQLConnection;
-    sqlExample2DevartTEST1: TStringField;
-    sqlExample2DevartTEST2: TStringField;
-    cdsExample2DevartTEST1: TStringField;
-    cdsExample2DevartTEST2: TStringField;
-    sqlExample2FirebirdTEST1: TStringField;
-    sqlExample2FirebirdTEST2: TStringField;
-    cdsExample2FirebirdTEST1: TStringField;
-    cdsExample2FirebirdTEST2: TStringField;
-    sqlSearchExampleDevart: TSQLDataSet;
-    sqlSearchExampleFirebird: TSQLDataSet;
-    sqlSearchExampleDevartFIELD_TEST1: TStringField;
-    sqlSearchExampleDevartFIELD_TEST2: TStringField;
-    sqlSearchExampleFirebirdFIELD_TEST1: TStringField;
-    sqlSearchExampleFirebirdFIELD_TEST2: TStringField;
+    sqlConnectionDevart: TSQLConnection;
     sqlTransactions: TSQLDataSet;
     cdsTransactions: TClientDataSet;
     dspTransactions: TDataSetProvider;
@@ -92,18 +69,64 @@ type
     cdsTransactionsPAGE_WRITES: TLargeintField;
     cdsTransactionsPAGE_FETCHES: TLargeintField;
     cdsTransactionsPAGE_MARKS: TLargeintField;
-    sqlExample2DevartID: TIntegerField;
-    cdsExample2DevartID: TIntegerField;
-    sqlExample2FirebirdID: TIntegerField;
-    cdsExample2FirebirdID: TIntegerField;
-    sqlSearchExampleFirebirdID: TLargeintField;
-    sqlSearchExampleDevartID: TLargeintField;
+    sqlStatements: TSQLDataSet;
+    cdsStatements: TClientDataSet;
+    dspStatements: TDataSetProvider;
+    dsStatements: TDataSource;
+    sqlStatementsSTATEMENT_ID: TIntegerField;
+    sqlStatementsATTACHMENT_ID: TIntegerField;
+    sqlStatementsTRANSACTION_ID: TIntegerField;
+    sqlStatementsUSER_NAME: TStringField;
+    sqlStatementsREMOTE_ADDRESS: TStringField;
+    sqlStatementsREMOTE_PID: TIntegerField;
+    sqlStatementsREMOTE_PROCESS: TStringField;
+    sqlStatementsSTATE: TStringField;
+    sqlStatementsSTARTED_AT: TSQLTimeStampField;
+    sqlStatementsSTATEMENT_TEXT: TMemoField;
+    sqlStatementsNON_INDEXED_READS: TLargeintField;
+    sqlStatementsINDEXED_READS: TLargeintField;
+    sqlStatementsRECORDS_INSERTED: TLargeintField;
+    sqlStatementsRECORDS_UPDATED: TLargeintField;
+    sqlStatementsRECORDS_DELETED: TLargeintField;
+    sqlStatementsRECORDS_BACKED_OUT: TLargeintField;
+    sqlStatementsRECORDS_PURGED: TLargeintField;
+    sqlStatementsRECORDS_EXPUNGED: TLargeintField;
+    sqlStatementsPAGE_READS: TLargeintField;
+    sqlStatementsPAGE_WRITES: TLargeintField;
+    sqlStatementsPAGE_FETCHES: TLargeintField;
+    sqlStatementsPAGE_MARKS: TLargeintField;
+    cdsStatementsSTATEMENT_ID: TIntegerField;
+    cdsStatementsATTACHMENT_ID: TIntegerField;
+    cdsStatementsTRANSACTION_ID: TIntegerField;
+    cdsStatementsUSER_NAME: TStringField;
+    cdsStatementsREMOTE_ADDRESS: TStringField;
+    cdsStatementsREMOTE_PID: TIntegerField;
+    cdsStatementsREMOTE_PROCESS: TStringField;
+    cdsStatementsSTATE: TStringField;
+    cdsStatementsSTARTED_AT: TSQLTimeStampField;
+    cdsStatementsSTATEMENT_TEXT: TMemoField;
+    cdsStatementsNON_INDEXED_READS: TLargeintField;
+    cdsStatementsINDEXED_READS: TLargeintField;
+    cdsStatementsRECORDS_INSERTED: TLargeintField;
+    cdsStatementsRECORDS_UPDATED: TLargeintField;
+    cdsStatementsRECORDS_DELETED: TLargeintField;
+    cdsStatementsRECORDS_BACKED_OUT: TLargeintField;
+    cdsStatementsRECORDS_PURGED: TLargeintField;
+    cdsStatementsRECORDS_EXPUNGED: TLargeintField;
+    cdsStatementsPAGE_READS: TLargeintField;
+    cdsStatementsPAGE_WRITES: TLargeintField;
+    cdsStatementsPAGE_FETCHES: TLargeintField;
+    cdsStatementsPAGE_MARKS: TLargeintField;
+    sqlSearchByIDDevart: TSQLDataSet;
+    sqlSearchByIDDevartID: TIntegerField;
+    sqlSearchByIDDevartFIELD_TEST1: TStringField;
+    sqlSearchByIDDevartFIELD_TEST2: TStringField;
+    sqlInsertExampleDevart: TSQLDataSet;
   private
     { Private declarations }
   public
     { Public declarations }
     procedure IncRegisterDevart;
-    procedure IncRegisterFirebird;
     procedure ConsultTransactions;
   end;
 
@@ -113,7 +136,7 @@ var
 implementation
 
 uses
-  Data.DBXCommon;
+  Data.DBXCommon, Vcl.Dialogs;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
@@ -123,50 +146,48 @@ uses
 
 procedure TDDmTest.ConsultTransactions;
 begin
-  if not(sqlConectionDevartFirebird.Connected) then
+  if not(sqlConnectionDevart.Connected) then
     Abort;
 
   cdsTransactions.Close;
   cdsTransactions.Open;
+
+  cdsStatements.Close;
+  cdsStatements.Open;
 end;
 
 procedure TDDmTest.IncRegisterDevart;
 var
   vTrans: TDBXTransaction;
+  vParams: TParams;
+  vResult: TSQLDataSet;
+  vId: Integer;
 begin
-  vTrans := sqlConectionDevartFirebird.BeginTransaction;
+  vTrans := sqlConnectionDevart.BeginTransaction;
   try
-    cdsExample2Devart.Open;
-    sqlSearchExampleDevart.Open;
+    sqlInsertExampleDevart.ParamByName('FIELD_TEST1').AsString := 'Test1';
+    sqlInsertExampleDevart.ParamByName('FIELD_TEST2').AsString := 'Test2';
+    sqlInsertExampleDevart.ExecSQL;
 
-    sleep(5000);
+    vId := sqlInsertExampleDevart.ParamByName('ID').AsInteger;
 
-    sqlConectionDevartFirebird.CommitFreeAndNil(vTrans);
-    cdsExample2Devart.Close;
+    sqlSearchByIDDevart.Close;
+    sqlSearchByIDDevart.ParamByName('ID').AsInteger := vId;
+    sqlSearchByIDDevart.Open;
+
+    if sqlSearchByIDDevart.IsEmpty then
+      ShowMessage('Not found.' + sLineBreak +
+                  'ID: ' + vId.ToString)
+    else
+      ShowMessage('Found.' + sLineBreak +
+                  'ID: ' + sqlSearchByIDDevartID.AsString + sLineBreak +
+                  'FIELD_TEST1: ' + sqlSearchByIDDevartFIELD_TEST1.AsString + sLineBreak +
+                  'FIELD_TEST2: ' + sqlSearchByIDDevartFIELD_TEST2.AsString);
+
+    sqlConnectionDevart.CommitFreeAndNil(vTrans);
   except
     on E: Exception do begin
-      sqlConectionDevartFirebird.RollbackFreeAndNil(vTrans);
-      raise E;
-    end;
-  end;
-end;
-
-procedure TDDmTest.IncRegisterFirebird;
-var
-  vTrans: TDBXTransaction;
-begin
-  vTrans := sqlConectionFirebird.BeginTransaction;
-  try
-    cdsExample2Firebird.Open;
-    sqlSearchExampleFirebird.Open;
-
-    sleep(5000);
-
-    sqlConectionFirebird.CommitFreeAndNil(vTrans);
-    cdsExample2Firebird.Close;
-  except
-    on E: Exception do begin
-      sqlConectionFirebird.RollbackFreeAndNil(vTrans);
+      sqlConnectionDevart.RollbackFreeAndNil(vTrans);
       raise E;
     end;
   end;

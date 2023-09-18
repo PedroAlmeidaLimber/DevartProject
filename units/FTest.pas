@@ -9,28 +9,25 @@ uses
 
 type
   TFFrmTest = class(TForm)
-    pnlDevart: TPanel;
-    btnIncRegDevart: TButton;
-    grpTransactions: TGroupBox;
-    grdTransactions: TDBGrid;
     tmrTransactions: TTimer;
-    btnIncRegFirebird: TButton;
-    imgProcessingDevart: TImage;
-    imgProcessingFirebird: TImage;
-    imgOkDevart: TImage;
-    imgOkFirebird: TImage;
+    pnlDevart: TPanel;
+    grpView: TGroupBox;
+    grdView: TDBGrid;
+    pnlButtons: TPanel;
     lblProcessingDevart: TLabel;
-    lblProcessingFirebird: TLabel;
+    imgProcessingDevart: TImage;
+    imgOkDevart: TImage;
+    rgTypeView: TRadioGroup;
+    btnIncRegDevart: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnIncRegDevartClick(Sender: TObject);
     procedure tmrTransactionsTimer(Sender: TObject);
-    procedure btnIncRegFirebirdClick(Sender: TObject);
+    procedure rgTypeViewClick(Sender: TObject);
   private
     FDmTest: TDDmTest;
     { Private declarations }
     procedure IncRegDevart;
-    procedure IncRegFirebird;
   public
     { Public declarations }
     property DmTest: TDDmTest read FDmTest;
@@ -52,16 +49,10 @@ begin
   );
 end;
 
-procedure TFFrmTest.btnIncRegFirebirdClick(Sender: TObject);
-begin
-  TTask.Run(
-    IncRegFirebird
-  );
-end;
-
 procedure TFFrmTest.FormCreate(Sender: TObject);
 begin
   FDmTest := TDDmTest.Create(Self);
+  rgTypeViewClick(rgTypeView);
 end;
 
 procedure TFFrmTest.FormDestroy(Sender: TObject);
@@ -87,19 +78,16 @@ begin
   end;
 end;
 
-procedure TFFrmTest.IncRegFirebird;
+procedure TFFrmTest.rgTypeViewClick(Sender: TObject);
 begin
-  try
-    imgOkFirebird.Visible := False;
-    imgProcessingFirebird.Visible := True;
-    lblProcessingFirebird.Caption := 'Processing...';
-    FDmTest.IncRegisterFirebird;
-    lblProcessingFirebird.Caption := 'Ok!';
-    imgProcessingFirebird.Visible := False;
-    imgOkFirebird.Visible := True;
-  except
-    on E: Exception do begin
-      Application.MessageBox(PChar('Error: '), PChar(E.Message));
+  case rgTypeView.ItemIndex of
+    0: begin
+      grpView.Caption := 'Statements';
+      grdView.DataSource := FDmTest.dsStatements;
+    end;
+    1: begin
+      grpView.Caption := 'Transactions';
+      grdView.DataSource := FDmTest.dsTransactions;
     end;
   end;
 end;

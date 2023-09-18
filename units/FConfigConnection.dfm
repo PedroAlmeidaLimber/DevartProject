@@ -13,6 +13,7 @@ object FFrmConnect: TFFrmConnect
   OldCreateOrder = False
   Position = poMainFormCenter
   OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lblDirectory: TLabel
@@ -98,7 +99,8 @@ object FFrmConnect: TFFrmConnect
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
-    TabOrder = 3
+    TabOrder = 4
+    TabStop = False
     OnClick = btnSelecDirectoryClick
   end
   object btnConnect: TBitBtn
@@ -143,7 +145,7 @@ object FFrmConnect: TFFrmConnect
       00000000000000000000000000000000000000000000DB41712BDE437291DD43
       73D5DD4373F4DD4373F4DD4373D4DD437390DB43732A00000000000000000000
       000000000000}
-    TabOrder = 4
+    TabOrder = 3
     OnClick = btnConnectClick
   end
   object dlgDatabaseDirectory: TOpenDialog
